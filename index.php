@@ -15,6 +15,46 @@ Author URI: http://www.utm.utoronto.ca/
 ?>
 <?php 
 
+//This creates a widget that looks at the day of the week and posts something based on the day. Code based off of: http://stackoverflow.com/questions/6450539/display-php-object-depending-on-day-of-the-week
+
+class OnLocationWhereAreWe extends WP_Widget {
+
+	public function __construct() {
+		$widget_ops = array(
+		'classname' => 'widget_weekday',
+		'description' => __( 'Tells you where we are on what day of the week.') );
+		parent::__construct('on_location', __('On Location', 'youwaffle'), $widget_ops);
+	}
+
+
+	public function widget ( $args, $instance ) { 
+		
+    
+    $d=date("D");
+    if ($d=="Mon")
+      echo "We are at UTSG today!"; 
+    elseif ($d=="Tue")
+      echo "We are at UTM today!"; 
+    elseif ($d=="Wed")
+      echo "We are at UTSG today!"; 
+    elseif ($d=="Thu")
+      echo "We are at UTM today!"; 
+    elseif ($d=="Fri")
+      echo "We are at UTSC today!"; 
+    elseif ($d=="Sat")
+      echo "We are closed"; 
+    elseif ($d=="Sun")
+      echo "We are closed"; 
+    else
+      echo "Have a nice day!";
+    
+	}
+
+}
+
+add_action( 'widgets_init', function(){
+     register_widget( 'OnLocationWhereAreWe' );
+});
 
 
 class ShowCustomPost extends WP_Widget {
