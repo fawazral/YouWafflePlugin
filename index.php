@@ -57,6 +57,12 @@ add_action( 'widgets_init', function(){
 });
 
 
+?>
+<?php 
+
+
+//This creates a widget that that shows the 6 latest posts from the custom post type 'YouWafflePost'. This code is based from Lab 2.
+
 class ShowCustomPost extends WP_Widget {
 
 	public function __construct() {
@@ -100,6 +106,9 @@ add_action( 'widgets_init', function(){
 });
 
 
+
+
+// Create custom post type. Info found: https://codex.wordpress.org/Post_Types
 function custompost() {
 
 	register_post_type( 'YouWafflePost',
