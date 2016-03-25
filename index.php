@@ -117,44 +117,17 @@ function custompost() {
 }
 add_action( 'init', 'custompost' );
 
-//This creates a widget that shows the selected 6 latest posts from the custom post type 'YouWafflePost'.
-
-class ShowSelectedPost extends WP_Widget {
-
-	public function __construct() {
-		$widget_ops = array(
-		'classname' => 'widget_selectedpostblock',
-		'description' => __( 'Posts the 6 selected posts in the "You Waffle Posts" post page.') );
-		parent::__construct('show_selectedpost', __('Selected Post', 'youwaffle'), $widget_ops);
-	}
-
-	public function widget ( $args, $instance ) { 
-		
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$wp_query = new WP_Query();
-$wp_query->query('post_type=YouWafflePost&posts_per_page=6' . '&paged=' . $paged);
-?>
-
-<?php if ($wp_query->have_posts()) : ?>
-
-	<?php while ($wp_query->have_posts()) : $wp_query->the_post(); ?>
-
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
-		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-		<div id="grid"> 
-		  <?php the_post_thumbnail('thumbnail'); ?></a> 	
-		</div>
-	   </article>
-
-	<?php endwhile; ?>
-<?php endif; 
-    
-	}
-
+// Shortcode displays latest 6 posts
+function latest_custom ( $atts) {
+		extract( shortcode_atts(
+			$wp_query = new WP_Query();
+			$wp_query->query('post_type=YouWafflePost', 
+			'posts_per_page=6',
+			'order'='DSC')
+			), $atts ));
+	
 }
+add_shortcode('latest_custom', 'latest_custom');
 
-add_action( 'widgets_init', function(){
-     register_widget( 'ShowSelectedPost' );
-});
 
 ?>
