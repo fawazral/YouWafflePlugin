@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
  * @package YouWaffle_Widget
@@ -123,11 +124,10 @@ function latest_custom ( $atts) {
 			$wp_query = new WP_Query();
 			$wp_query->query('post_type=YouWafflePost', 
 			'posts_per_page=6',
-			'order'='DSC')
+			)'order=DESC',
 			), $atts ));
 	
 }
 add_shortcode('latest_custom', 'latest_custom');
-
 
 ?>
