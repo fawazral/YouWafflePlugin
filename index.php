@@ -126,6 +126,8 @@ function latest_custom ( $atts) {
 			'posts_per_page=6',
 			)'order=DESC',
 			), $atts );
+			
+		return '<div class="ShowCustomPost">';
 }
 add_shortcode('latest_custom', 'latest_custom');
 
