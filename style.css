@@ -1,0 +1,11 @@
+#widgetstyle {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+#gridview {
+    float: left;
+    padding-left: 10%;
+    padding-bottom: 5%;
+}

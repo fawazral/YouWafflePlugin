@@ -13,6 +13,7 @@ Author URI: http://www.utm.utoronto.ca/
 */
 
 ?>
+<div id="loll">
 <?php 
 
 //This creates a widget that looks at the day of the week and posts something based on the day. Code based off of: http://stackoverflow.com/questions/6450539/display-php-object-depending-on-day-of-the-week
@@ -58,6 +59,8 @@ add_action( 'widgets_init', function(){
 
 
 ?>
+</div>
+<div id="lol">
 <?php 
 
 
@@ -73,7 +76,10 @@ class ShowCustomPost extends WP_Widget {
 	}
 
 	public function widget ( $args, $instance ) { 
-		
+
+    ?> 
+<div id="widgetstyle" role="main">
+    <?php 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $wp_query = new WP_Query();
 $wp_query->query('post_type=YouWafflePost&posts_per_page=6' . '&paged=' . $paged);
@@ -85,13 +91,15 @@ $wp_query->query('post_type=YouWafflePost&posts_per_page=6' . '&paged=' . $paged
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
 		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-		<div id="grid"> 
+		<div id="gridlayout"> 
 		  <?php the_post_thumbnail('thumbnail'); ?></a> 	
 		</div>
 	   </article>
 
 	<?php endwhile; ?>
-<?php endif; 
+<?php endif; ?>
+    </div>
+    <?php 
     
 	}
 
@@ -121,7 +129,9 @@ add_action( 'init', 'custompost' );
 
 //This creates a shortcode that shows the 6 latest posts from the custom post type 'YouWafflePost'. 
 function CustomPostShort ( $args, $instance ) { 
-		
+		?>
+<div id="widgetstyle" role="main">
+    <?php
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $wp_query = new WP_Query();
     $wp_query->query('post_type=YouWafflePost&posts_per_page=6' . '&paged=' . $paged);
@@ -133,15 +143,25 @@ function CustomPostShort ( $args, $instance ) {
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
             <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-            <div id="grid"> 
+            <div id="gridview"> 
               <?php the_post_thumbnail('thumbnail'); ?></a> 	
-            </div>
+</div>
            </article>
 
         <?php endwhile; ?>
-    <?php endif; 
-    
+    <?php endif; ?>
+    <?php
 	}
 add_shortcode('CustomPostShort', 'CustomPostShort');
+?>
+</div>
+<?php
+
+
+function mystyle(){ 
+	wp_enqueue_style( 'style', plugins_url
+		('/style.css', __FILE__) );}
+
+add_action('wp_enqueue_scripts','mystyle');
 
 ?>
