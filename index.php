@@ -12,10 +12,6 @@ Version: 1.0
 Author URI: http://www.utm.utoronto.ca/
 */
 
-?>
-<div id="loll">
-<?php 
-
 //This creates a widget that looks at the day of the week and posts something based on the day. Code based off of: http://stackoverflow.com/questions/6450539/display-php-object-depending-on-day-of-the-week
 
 class OnLocationWhereAreWe extends WP_Widget {
@@ -29,7 +25,9 @@ class OnLocationWhereAreWe extends WP_Widget {
 
 
 	public function widget ( $args, $instance ) { 
-		
+?>
+<div align="center">
+<?php
     
     $d=date("D");
     if ($d=="Mon")
@@ -48,7 +46,9 @@ class OnLocationWhereAreWe extends WP_Widget {
       echo "We are closed"; 
     else
       echo "Have a nice day!";
-    
+?>
+</div>
+<?php
 	}
 
 }
@@ -56,13 +56,6 @@ class OnLocationWhereAreWe extends WP_Widget {
 add_action( 'widgets_init', function(){
      register_widget( 'OnLocationWhereAreWe' );
 });
-
-
-?>
-</div>
-<div id="lol">
-<?php 
-
 
 //This creates a widget that shows the 6 latest posts from the custom post type 'YouWafflePost'. This code is based from Lab 2.
 
@@ -153,9 +146,7 @@ function CustomPostShort ( $args, $instance ) {
     <?php
 	}
 add_shortcode('CustomPostShort', 'CustomPostShort');
-?>
-</div>
-<?php
+
 
 
 function mystyle(){ 
